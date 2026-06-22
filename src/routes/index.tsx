@@ -8,7 +8,6 @@ import { Reveal } from "@/components/santosh/Reveal";
 import {
   CountUp,
   Magnetic,
-  Marquee,
   Parallax,
   ScrollProgress,
   SplitHeading,
@@ -46,19 +45,19 @@ const STYLES = [
     num: "01",
     name: "Ashtanga",
     blurb: "A structured, dynamic series that builds internal heat through breath-linked movement.",
-    href: "https://www.ekhartyoga.com/articles/practice/what-is-ashtanga-yoga",
+    href: "https://www.ekhartyoga.com/resources/styles/ashtanga-yoga",
   },
   {
     num: "02",
     name: "Rocket",
     blurb: "A faster, playful evolution of Ashtanga that opens up arm balances and inversions.",
-    href: "https://www.ekhartyoga.com/articles/practice/what-is-rocket-yoga",
+    href: "https://theyogaspace.co.uk/what-is-rocket-yoga/",
   },
   {
     num: "03",
     name: "Yin",
     blurb: "Long, quiet floor-based holds that work into the connective tissue and stillness.",
-    href: "https://www.ekhartyoga.com/articles/practice/what-is-yin-yoga",
+    href: "https://www.ekhartyoga.com/resources/styles/yin-yoga",
   },
   {
     num: "04",
@@ -76,7 +75,7 @@ const STYLES = [
     num: "06",
     name: "Kundalini",
     blurb: "Kriya, mantra and breathwork to awaken energy and quiet the inner noise.",
-    href: "https://www.ekhartyoga.com/articles/practice/what-is-kundalini-yoga",
+    href: "https://www.mindbodygreen.com/articles/kundalini-yoga-101-everything-you-wanted-to-know",
   },
 ];
 
@@ -94,7 +93,7 @@ function Index() {
       <Nav />
       <Hero />
       <IntroHatha />
-      <DisciplineMarquee />
+      {/* <DisciplineMarquee /> */}
       <Disciplines />
       <Teacher />
       <Schedule />
@@ -250,7 +249,7 @@ function Hero() {
         >
           Santosh Yoga · Aldridge, UK
         </motion.p>
-        <h1 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-[5.6rem] italic leading-[1.02] text-balance">
+        <h1 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-[4.6rem] italic leading-[1.02] text-balance">
           <SplitHeading text="Breath is the bridge between" delay={0.1} />
           <br className="hidden md:block" />
           <span className="text-clay">
@@ -266,7 +265,7 @@ function Hero() {
           className="flex justify-center"
         >
           <div className="animate-breathe will-change-transform">
-            <ArchedFrame className="w-full max-w-[min(320px,56vh)]">
+            <ArchedFrame className="w-full max-w-[min(280px,56vh)]">
               <img
                 src={heroPortrait}
                 alt="Santosh, founder of Santosh Yoga, in meditation"
@@ -298,15 +297,9 @@ function Hero() {
   );
 }
 
-function DisciplineMarquee() {
-  return (
-    <div className="border-y border-henna/10 py-6 bg-sand-deep/40">
-      <Marquee items={["Ashtanga", "Rocket", "Yin", "Hatha", "Iyengar", "Kundalini"]} />
-    </div>
-  );
-}
-
 function IntroHatha() {
+  const { scrollY } = useScroll();
+  const hathaMandalaRot = useTransform(scrollY, [0, 2000], [0, -40]);
   return (
     <section id="practice" className="py-28 md:py-40 px-6 md:px-10">
       <div className="max-w-6xl mx-auto mb-16 md:mb-24 h-6" />
@@ -334,7 +327,7 @@ function IntroHatha() {
         <Reveal delay={0.1}>
           <div className="relative aspect-[4/5] bg-sand-deep overflow-hidden">
             <Parallax distance={40} className="absolute inset-6 text-henna/15">
-              <Mandala className="w-full h-full animate-slow-rotate" />
+              <Mandala className="w-full h-full" style={{ rotate: hathaMandalaRot }} />
             </Parallax>
             <ul className="absolute inset-0 flex flex-col justify-center gap-5 p-8 font-display text-xl italic sm:gap-6 sm:p-10 sm:text-2xl md:max-lg:text-xl lg:text-2xl">
               {[
@@ -452,14 +445,14 @@ function Teacher() {
             Kundalini, Santosh brings depth, anatomical care and quiet spirit to every class here in
             Aldridge.
           </p>
-          <div className="grid grid-cols-2 gap-8 pt-4 border-t border-henna/10">
+          <div className="grid grid-cols-1 gap-8 pt-4 border-t border-henna/10">
             <div>
               <p className="text-[10px] uppercase tracking-[0.22em] text-clay mb-2">Training</p>
-              <p className="text-sm text-henna/60">we need training & certifications here</p>
+              <p className="text-sm text-henna/60">Level 3 Diploma in Teaching Yoga - HFE</p>
             </div>
             <div>
               <p className="text-[10px] uppercase tracking-[0.22em] text-clay mb-2">Story</p>
-              <p className="text-sm text-henna/60">we need a personal story paragraph here</p>
+              <p className="text-sm text-henna/60">I began practicing yoga 10 years ago as an escape from the stress of daily life. I quickly fell in love with not only the moves, but the mindset behind them. </p>
             </div>
           </div>
         </Reveal>
@@ -519,9 +512,6 @@ function Schedule() {
               </motion.div>
             ))}
           </div>
-          <p className="text-center text-[10px] uppercase tracking-[0.28em] pt-10 text-henna/40">
-            placeholder timetable — we need the full weekly schedule and pricing here
-          </p>
         </Reveal>
       </div>
     </section>
@@ -539,17 +529,10 @@ function Visit() {
             <iframe
               title="Map of Aldridge"
               src="https://www.google.com/maps?q=Aldridge%2C%20Walsall%2C%20UK&output=embed"
-              loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="absolute inset-0 h-full w-full border-0 grayscale-[15%] sepia-[12%]"
             />
           </div>
-          <dl className="space-y-4 text-sm">
-            <div>
-              <dt className="text-[10px] uppercase tracking-[0.22em] text-clay mb-1">Access</dt>
-              <dd className="text-henna/70">we need parking & access notes here</dd>
-            </div>
-          </dl>
         </Reveal>
         <Reveal delay={0.1}>
           <ContactDetails />
@@ -561,8 +544,8 @@ function Visit() {
 
 function ContactDetails() {
   const details = [
-    { label: "Email", value: "we need email here" },
-    { label: "Phone", value: "we need phone here" },
+    { label: "Email", value: "hello@santoshyoga.com" },
+    { label: "Phone", value: "+44 7807 339051" },
     { label: "Location", value: "Aldridge, West Midlands, UK" },
   ];
 
@@ -654,9 +637,6 @@ function CommonQueries() {
               </AccordionItem>
             ))}
           </Accordion>
-          <p className="text-[10px] uppercase tracking-[0.28em] mt-8 text-henna/40">
-            answers are draft — please confirm with your teacher
-          </p>
         </Reveal>
       </div>
     </section>
