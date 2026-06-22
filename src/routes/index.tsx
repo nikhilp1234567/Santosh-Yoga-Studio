@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import heroPortrait from "@/assets/hero-portrait.png";
 import teacherPortrait from "@/assets/teacher-portrait.png";
+import lotusLogo from "@/assets/lotus.png";
 import { ArchedFrame, JaliStrip, Mandala } from "@/components/santosh/ornaments";
 import { Reveal } from "@/components/santosh/Reveal";
 import {
@@ -676,7 +677,17 @@ function Footer() {
         </div>
         <div className="flex flex-col md:flex-row justify-between gap-4 pt-8 border-t border-sand/10 text-[10px] uppercase tracking-[0.28em] text-sand/40">
           <span>© {new Date().getFullYear()} Santosh Yoga</span>
-          <span>Aldridge · West Midlands · UK</span>
+          <span className="normal-case tracking-[0.15em]">
+            Built with <img src={lotusLogo} alt="" className="h-8 w-auto inline-block align-middle" /> by{" "}
+            <a
+              href="https://littlelotus.co"
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-2 hover:text-sand/60 transition-colors"
+            >
+              Little Lotus
+            </a>
+          </span>
         </div>
       </div>
     </footer>
