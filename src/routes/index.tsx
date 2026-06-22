@@ -19,8 +19,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -92,7 +90,6 @@ const NAV = [
 function Index() {
   return (
     <div className="bg-sand text-henna font-sans selection:bg-clay/20 overflow-x-hidden">
-      <Toaster position="top-center" />
       <ScrollProgress />
       <Nav />
       <Hero />
@@ -102,7 +99,8 @@ function Index() {
       <Teacher />
       <Schedule />
       <Visit />
-      <TestimonialsFaq />
+      <Voices />
+      <CommonQueries />
       <Footer />
     </div>
   );
@@ -548,92 +546,58 @@ function Visit() {
           </div>
           <dl className="space-y-4 text-sm">
             <div>
-              <dt className="text-[10px] uppercase tracking-[0.22em] text-clay mb-1">Address</dt>
-              <dd className="text-henna/70">we need the exact studio address here, Aldridge, UK</dd>
-            </div>
-            <div>
               <dt className="text-[10px] uppercase tracking-[0.22em] text-clay mb-1">Access</dt>
               <dd className="text-henna/70">we need parking & access notes here</dd>
             </div>
           </dl>
         </Reveal>
         <Reveal delay={0.1}>
-          <ContactForm />
+          <ContactDetails />
         </Reveal>
       </div>
     </section>
   );
 }
 
-function ContactForm() {
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    toast.success("Thank you — we'll be in touch soon.");
-    (e.currentTarget as HTMLFormElement).reset();
-  }
+function ContactDetails() {
+  const details = [
+    { label: "Email", value: "we need email here" },
+    { label: "Phone", value: "we need phone here" },
+    { label: "Location", value: "Aldridge, West Midlands, UK" },
+  ];
+
   return (
-    <form
+    <section
       id="contact"
-      onSubmit={onSubmit}
-      className="space-y-8 p-8 md:p-10 bg-sand-deep/40 ring-1 ring-henna/10"
+      className="relative overflow-hidden p-8 md:p-10 bg-henna text-sand min-h-full grain-overlay"
     >
-      <div>
-        <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Inquire</p>
-        <h3 className="font-display text-3xl md:text-4xl italic">Get in touch</h3>
+      <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 text-clay/30">
+        <Mandala className="h-full w-full animate-slow-rotate" />
       </div>
-      <Field label="Name" name="name" type="text" />
-      <Field label="Email" name="email" type="email" />
-      <Field label="Message" name="message" textarea />
-      <button
-        type="submit"
-        className="w-full py-4 bg-henna text-sand uppercase tracking-[0.22em] text-[10px] font-medium hover:bg-clay transition-colors"
-      >
-        Send message
-      </button>
-      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-henna/10 text-xs">
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.22em] text-clay mb-1">Email</p>
-          <p className="text-henna/60">we need email here</p>
-        </div>
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.22em] text-clay mb-1">Phone</p>
-          <p className="text-henna/60">we need phone here</p>
+      <div className="relative">
+        <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Contact</p>
+        <h3 className="font-display text-3xl md:text-4xl italic mb-5">Speak with the studio</h3>
+        <p className="text-sand/65 leading-relaxed mb-10 max-w-md">
+          For class questions, private sessions or first-visit guidance, use the direct details below.
+        </p>
+        <div className="divide-y divide-sand/10 border-y border-sand/10">
+          {details.map((item) => (
+            <div key={item.label} className="grid grid-cols-[7rem_1fr] gap-5 py-6 items-baseline">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-clay">{item.label}</p>
+              <p className="font-display text-2xl italic text-sand">{item.value}</p>
+            </div>
+          ))}
         </div>
       </div>
-    </form>
+    </section>
   );
 }
 
-function Field({
-  label,
-  name,
-  type = "text",
-  textarea = false,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  textarea?: boolean;
-}) {
-  const cls =
-    "w-full bg-transparent border-b border-henna/20 py-3 outline-none focus:border-clay transition-colors text-sm placeholder:text-henna/30";
-  return (
-    <label className="block">
-      <span className="text-[10px] uppercase tracking-[0.22em] text-henna/50">{label}</span>
-      {textarea ? (
-        <textarea name={name} rows={4} required className={cls + " resize-none"} />
-      ) : (
-        <input name={name} type={type} required className={cls} />
-      )}
-    </label>
-  );
-}
-
-function TestimonialsFaq() {
+function Voices() {
   return (
     <section className="py-28 md:py-36 px-6 md:px-10 bg-sage/10">
       <div className="max-w-6xl mx-auto">
-        <Reveal className="text-center mb-24">
+        <Reveal className="text-center">
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-6">Voices</p>
           <p className="font-display text-2xl md:text-3xl italic leading-relaxed text-henna/85">
             “we need testimonials here — a quiet, generous space. Santosh teaches with real depth
@@ -643,7 +607,15 @@ function TestimonialsFaq() {
             — placeholder · we need real testimonials here
           </p>
         </Reveal>
+      </div>
+    </section>
+  );
+}
 
+function CommonQueries() {
+  return (
+    <section className="py-28 md:py-36 px-6 md:px-10 bg-sand">
+      <div className="max-w-6xl mx-auto">
         <Reveal>
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Common Queries</p>
           <h3 className="font-display text-3xl md:text-4xl italic mb-10">
@@ -665,7 +637,7 @@ function TestimonialsFaq() {
               },
               {
                 q: "How do I book?",
-                a: "Use the contact form below or message us directly. we need booking link / system here.",
+                a: "Use the contact details below or message us directly. we need booking link / system here.",
               },
               {
                 q: "Do you offer private sessions?",
