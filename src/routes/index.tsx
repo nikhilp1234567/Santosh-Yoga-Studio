@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import heroPortrait from "@/assets/hero-portrait.jpg";
-import teacherPortrait from "@/assets/teacher-portrait.jpg";
+import heroPortrait from "@/assets/hero-portrait.png";
+import teacherPortrait from "@/assets/teacher-portrait.png";
 import { ArchedFrame, JaliStrip, Mandala } from "@/components/santosh/ornaments";
 import { Reveal } from "@/components/santosh/Reveal";
 import {
@@ -166,14 +166,6 @@ function Nav() {
           </a>
         ))}
       </div>
-      <Magnetic className="hidden sm:inline-block" strength={0.35}>
-        <a
-          href="#contact"
-          className="inline-block border border-henna/25 px-5 py-2 text-[10px] uppercase tracking-[0.22em] hover:bg-henna hover:text-sand transition-colors"
-        >
-          Book a Class
-        </a>
-      </Magnetic>
       <button
         className="md:hidden text-[10px] uppercase tracking-[0.22em] border border-henna/25 px-3 py-1.5"
         onClick={() => setOpen((v) => !v)}
@@ -203,6 +195,16 @@ function Nav() {
                 {n.label}
               </motion.a>
             ))}
+            <motion.a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.08 * NAV.length, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              className="mx-6 my-5 inline-flex justify-center border border-henna/25 px-4 py-3 text-[10px] uppercase tracking-[0.22em]"
+            >
+              Join WhatsApp Group
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
@@ -243,7 +245,7 @@ function Hero() {
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           className="text-[10px] uppercase tracking-[0.3em] text-clay"
         >
-          Hatha Yoga · Aldridge, UK
+          Santosh Yoga · Aldridge, UK
         </motion.p>
         <h1 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-[5.6rem] italic leading-[1.02] text-balance">
           <SplitHeading text="Breath is the bridge between" delay={0.1} />
@@ -527,11 +529,14 @@ function Visit() {
         <Reveal>
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Find us</p>
           <h3 className="font-display text-4xl md:text-5xl italic mb-10">The Aldridge Studio</h3>
-          <div className="aspect-[4/3] bg-sand-deep grid place-items-center mb-6 ring-1 ring-henna/10 relative overflow-hidden">
-            <div className="absolute inset-0 jali-dots opacity-20" />
-            <span className="relative font-display text-5xl italic text-henna/70">
-              Aldridge
-            </span>
+          <div className="aspect-[4/3] bg-sand-deep mb-6 ring-1 ring-henna/10 relative overflow-hidden">
+            <iframe
+              title="Map of Aldridge"
+              src="https://www.google.com/maps?q=Aldridge%2C%20Walsall%2C%20UK&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 h-full w-full border-0 grayscale-[15%] sepia-[12%]"
+            />
           </div>
           <dl className="space-y-4 text-sm">
             <div>
