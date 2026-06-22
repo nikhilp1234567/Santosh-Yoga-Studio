@@ -18,6 +18,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -327,7 +328,9 @@ function IntroHatha() {
         <Reveal delay={0.1}>
           <div className="relative aspect-[4/5] bg-sand-deep overflow-hidden">
             <Parallax distance={40} className="absolute inset-6 text-henna/15">
-              <Mandala className="w-full h-full" style={{ rotate: hathaMandalaRot }} />
+              <motion.div style={{ rotate: hathaMandalaRot }} className="w-full h-full">
+                <Mandala className="w-full h-full" />
+              </motion.div>
             </Parallax>
             <ul className="absolute inset-0 flex flex-col justify-center gap-5 p-8 font-display text-xl italic sm:gap-6 sm:p-10 sm:text-2xl md:max-lg:text-xl lg:text-2xl">
               {[
@@ -519,6 +522,7 @@ function Schedule() {
 }
 
 function Visit() {
+  const isMobile = useIsMobile();
   return (
     <section id="visit" className="py-28 md:py-36 px-6 md:px-10">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24">
@@ -535,7 +539,9 @@ function Visit() {
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <ContactDetails />
+          <Parallax distance={isMobile ? 0 : 30}>
+            <ContactDetails />
+          </Parallax>
         </Reveal>
       </div>
     </section>
