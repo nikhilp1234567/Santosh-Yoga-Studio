@@ -138,9 +138,7 @@ function Nav() {
     <nav
       className={
         "fixed top-0 inset-x-0 z-50 px-6 md:px-10 flex justify-between items-center backdrop-blur-md border-b border-henna/5 opacity-0 animate-header-fade transition-[padding,background-color] duration-700 ease-out " +
-        (scrolled
-          ? "py-3 bg-sand/85"
-          : "py-[22px] bg-sand/40")
+        (scrolled ? "py-3 bg-sand/75" : "py-[22px] bg-sand/30")
       }
     >
       <a href="#top" className="font-display font-semibold tracking-tight">
@@ -155,7 +153,11 @@ function Nav() {
       </a>
       <div className="hidden md:flex gap-10 text-[10px] uppercase tracking-[0.22em] font-medium">
         {NAV.map((n) => (
-          <a key={n.href} href={n.href} className="relative group hover:text-clay transition-colors">
+          <a
+            key={n.href}
+            href={n.href}
+            className="relative group hover:text-clay transition-colors"
+          >
             {n.label}
             <span
               className={
@@ -221,7 +223,10 @@ function Hero() {
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
 
   return (
-    <section id="top" className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-14 overflow-visible grain-overlay">
+    <section
+      id="top"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-10 pt-32 pb-14 overflow-visible grain-overlay"
+    >
       <motion.div
         style={{ y: mandalaY, rotate: mandalaRot }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(140vw,1100px)] aspect-square text-clay/25 pointer-events-none"
@@ -237,13 +242,13 @@ function Hero() {
 
       <motion.div
         style={{ y: contentY, opacity: heroOpacity }}
-        className="relative z-10 text-center max-w-5xl px-6 flex flex-col items-center gap-7 md:gap-8"
+        className="relative z-10 text-center max-w-5xl flex flex-col items-center gap-7 md:gap-8"
       >
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[10px] uppercase tracking-[0.3em] text-clay"
+          className="text-[10px] uppercase tracking-[0.3em] text-black"
         >
           Santosh Yoga · Aldridge, UK
         </motion.p>
@@ -289,12 +294,6 @@ function Hero() {
               View the Schedule
             </a>
           </Magnetic>
-          <a
-            href="#practice"
-            className="text-[11px] uppercase tracking-[0.22em] border-b border-henna/30 pb-1 hover:text-clay hover:border-clay transition-colors"
-          >
-            Learn about Hatha
-          </a>
         </motion.div>
       </motion.div>
     </section>
@@ -311,9 +310,9 @@ function DisciplineMarquee() {
 
 function IntroHatha() {
   return (
-    <section id="practice" className="py-28 md:py-40 px-6">
+    <section id="practice" className="py-28 md:py-40 px-6 md:px-10">
       <div className="max-w-6xl mx-auto mb-16 md:mb-24 h-6" />
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-center">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         <Reveal className="space-y-6">
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay">The Practice</p>
           <h2 className="font-display text-4xl md:text-5xl italic leading-tight">
@@ -321,9 +320,9 @@ function IntroHatha() {
           </h2>
           <p className="text-pretty leading-relaxed text-henna/80 text-lg">
             Hatha is the foundation of balance — uniting the sun{" "}
-            <span className="italic">(Ha)</span> and the moon{" "}
-            <span className="italic">(Tha)</span>. Our practice in Aldridge honours this ancient
-            lineage through steady posture, conscious breath and quiet, deliberate attention.
+            <span className="italic">(Ha)</span> and the moon <span className="italic">(Tha)</span>.
+            Our practice in Aldridge honours this ancient lineage through steady posture, conscious
+            breath and quiet, deliberate attention.
           </p>
           <p className="text-pretty leading-relaxed text-henna/60">
             Classes are warm, unhurried and welcoming to every body — from the first time on a mat
@@ -335,11 +334,11 @@ function IntroHatha() {
           </p>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="relative aspect-[4/5] bg-sand-deep overflow-hidden ring-1 ring-henna/10">
+          <div className="relative aspect-[4/5] bg-sand-deep overflow-hidden">
             <Parallax distance={40} className="absolute inset-6 text-henna/15">
               <Mandala className="w-full h-full animate-slow-rotate" />
             </Parallax>
-            <ul className="absolute inset-0 flex flex-col justify-center gap-6 p-10 font-display text-2xl italic">
+            <ul className="absolute inset-0 flex flex-col justify-center gap-5 p-8 font-display text-xl italic sm:gap-6 sm:p-10 sm:text-2xl md:max-lg:text-xl lg:text-2xl">
               {[
                 ["01", "Asana", "steady posture"],
                 ["02", "Pranayama", "conscious breath"],
@@ -352,9 +351,11 @@ function IntroHatha() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 1.2, delay: 0.15 + i * 0.18, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex gap-4 items-baseline"
+                  className="flex flex-wrap gap-x-4 gap-y-1 items-baseline"
                 >
-                  <span className="text-[10px] tracking-[0.2em] font-sans not-italic text-clay">{n}</span>
+                  <span className="text-[10px] tracking-[0.2em] font-sans not-italic text-clay">
+                    {n}
+                  </span>
                   {word} — {gloss}
                 </motion.li>
               ))}
@@ -368,8 +369,8 @@ function IntroHatha() {
 
 function Disciplines() {
   return (
-    <section className="py-28 md:py-36 bg-henna text-sand grain-overlay">
-      <div className="px-6 md:px-10 mb-16 max-w-6xl mx-auto">
+    <section className="py-28 md:py-36 px-6 md:px-10 bg-henna text-sand grain-overlay">
+      <div className="mb-16 max-w-6xl mx-auto">
         <Reveal>
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Disciplines</p>
           <h3 className="font-display text-4xl md:text-6xl italic leading-tight">
@@ -381,7 +382,7 @@ function Disciplines() {
         </Reveal>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-sand/10 border-y border-sand/10">
+      <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-sand/10 border-y border-sand/10">
         {STYLES.map((s, i) => (
           <Reveal key={s.name} delay={i * 0.05}>
             <a
@@ -393,7 +394,9 @@ function Disciplines() {
               <div className="pointer-events-none absolute -right-10 -bottom-10 w-56 h-56 text-clay/0 group-hover:text-clay/40 transition-colors duration-700">
                 <Mandala className="w-full h-full animate-slow-rotate" />
               </div>
-              <span className="relative text-[10px] text-clay font-medium tracking-[0.22em]">{s.num}</span>
+              <span className="relative text-[10px] text-clay font-medium tracking-[0.22em]">
+                {s.num}
+              </span>
               <h4 className="relative font-display text-3xl italic mt-6 mb-4 transition-transform duration-500 group-hover:-translate-y-1">
                 {s.name}
               </h4>
@@ -403,7 +406,9 @@ function Disciplines() {
                   Learn more
                   <span className="absolute left-0 -bottom-0.5 h-px w-full bg-clay scale-x-100 origin-right group-hover:origin-left transition-transform duration-500" />
                 </span>
-                <span className="ml-2 transition-transform duration-500 group-hover:translate-x-2">→</span>
+                <span className="ml-2 transition-transform duration-500 group-hover:translate-x-2">
+                  →
+                </span>
               </span>
             </a>
           </Reveal>
@@ -415,9 +420,9 @@ function Disciplines() {
 
 function Teacher() {
   return (
-    <section id="teacher" className="py-28 md:py-40 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center">
-        <Reveal className="w-full md:w-1/2">
+    <section id="teacher" className="py-28 md:py-40 px-6 md:px-10">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+        <Reveal className="w-full lg:w-1/2">
           <Parallax distance={30}>
             <ArchedFrame>
               <img
@@ -431,7 +436,7 @@ function Teacher() {
             </ArchedFrame>
           </Parallax>
         </Reveal>
-        <Reveal delay={0.1} className="w-full md:w-1/2 space-y-8">
+        <Reveal delay={0.1} className="w-full lg:w-1/2 space-y-8">
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay">The Teacher</p>
           <h2 className="font-display text-4xl md:text-5xl italic leading-tight">
             Guided by Santosh.
@@ -446,8 +451,8 @@ function Teacher() {
           </p>
           <p className="text-base leading-relaxed text-henna/75">
             With a decade of dedicated practice across Ashtanga, Rocket, Yin, Hatha, Iyengar and
-            Kundalini, Santosh brings depth, anatomical care and quiet spirit to every class here
-            in Aldridge.
+            Kundalini, Santosh brings depth, anatomical care and quiet spirit to every class here in
+            Aldridge.
           </p>
           <div className="grid grid-cols-2 gap-8 pt-4 border-t border-henna/10">
             <div>
@@ -484,8 +489,11 @@ function Schedule() {
     { day: "Sunday", time: "17:00", name: "Yin & Stillness", price: "£14" },
   ];
   return (
-    <section id="schedule" className="py-28 md:py-36 px-6 bg-sand-deep/40 border-y border-henna/10">
-      <div className="max-w-4xl mx-auto">
+    <section
+      id="schedule"
+      className="py-28 md:py-36 px-6 md:px-10 bg-sand-deep/40 border-y border-henna/10"
+    >
+      <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-14">
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Schedule</p>
           <h3 className="font-display text-4xl md:text-5xl italic">Weekly Practice</h3>
@@ -500,7 +508,7 @@ function Schedule() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ x: 6 }}
-                className="grid grid-cols-[1fr_2fr_auto] gap-6 items-center py-6 border-b border-henna/10 hover:bg-sand/60 transition-colors px-2 cursor-default"
+                className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-3 items-center py-6 border-b border-henna/10 hover:bg-sand/60 transition-colors px-2 cursor-default sm:grid-cols-[1fr_2fr_auto]"
               >
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.22em] font-medium text-henna/70">
@@ -508,7 +516,7 @@ function Schedule() {
                   </p>
                   <p className="text-sm text-henna/50 mt-1">{r.time}</p>
                 </div>
-                <p className="font-display text-2xl italic">{r.name}</p>
+                <p className="col-span-2 font-display text-2xl italic sm:col-span-1">{r.name}</p>
                 <p className="text-clay font-medium">{r.price}</p>
               </motion.div>
             ))}
@@ -524,8 +532,8 @@ function Schedule() {
 
 function Visit() {
   return (
-    <section id="visit" className="py-28 md:py-36 px-6">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24">
+    <section id="visit" className="py-28 md:py-36 px-6 md:px-10">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24">
         <Reveal>
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Find us</p>
           <h3 className="font-display text-4xl md:text-5xl italic mb-10">The Aldridge Studio</h3>
@@ -564,7 +572,11 @@ function ContactForm() {
     (e.currentTarget as HTMLFormElement).reset();
   }
   return (
-    <form id="contact" onSubmit={onSubmit} className="space-y-8 p-8 md:p-10 bg-sand-deep/40 ring-1 ring-henna/10">
+    <form
+      id="contact"
+      onSubmit={onSubmit}
+      className="space-y-8 p-8 md:p-10 bg-sand-deep/40 ring-1 ring-henna/10"
+    >
       <div>
         <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Inquire</p>
         <h3 className="font-display text-3xl md:text-4xl italic">Get in touch</h3>
@@ -619,8 +631,8 @@ function Field({
 
 function TestimonialsFaq() {
   return (
-    <section className="py-28 md:py-36 bg-sage/10">
-      <div className="max-w-3xl mx-auto px-6">
+    <section className="py-28 md:py-36 px-6 md:px-10 bg-sage/10">
+      <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-24">
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-6">Voices</p>
           <p className="font-display text-2xl md:text-3xl italic leading-relaxed text-henna/85">
@@ -634,7 +646,9 @@ function TestimonialsFaq() {
 
         <Reveal>
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Common Queries</p>
-          <h3 className="font-display text-3xl md:text-4xl italic mb-10">Before your first class</h3>
+          <h3 className="font-display text-3xl md:text-4xl italic mb-10">
+            Before your first class
+          </h3>
           <Accordion type="single" collapsible className="border-t border-henna/10">
             {[
               {
@@ -679,7 +693,7 @@ function TestimonialsFaq() {
 
 function Footer() {
   return (
-    <footer className="bg-henna text-sand/80 pt-20 pb-10 px-6 grain-overlay">
+    <footer className="bg-henna text-sand/80 pt-20 pb-10 px-6 md:px-10 grain-overlay">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           <div>
@@ -698,8 +712,7 @@ function Footer() {
             <p className="text-sm">we need email here</p>
             <p className="text-sm">we need phone here</p>
             <p className="text-sm">
-              Instagram —{" "}
-              <span className="text-sand/50">we need Instagram handle here</span>
+              Instagram — <span className="text-sand/50">we need Instagram handle here</span>
             </p>
           </div>
         </div>
