@@ -11,7 +11,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 /** Top-of-page horizontal scroll progress bar. */
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 80, damping: 34, mass: 0.6 });
   return (
     <motion.div
       style={{ scaleX, transformOrigin: "0% 50%" }}
@@ -35,14 +35,14 @@ export function SplitHeading({
   return (
     <span className={className}>
       {words.map((w, i) => (
-        <span key={i} className="inline-block overflow-hidden align-baseline">
+        <span key={i} className="inline-block overflow-hidden align-baseline py-[0.08em] -my-[0.08em]">
           <motion.span
             className="inline-block will-change-transform"
             initial={{ y: "110%", opacity: 0 }}
             animate={{ y: "0%", opacity: 1 }}
             transition={{
-              duration: 1.1,
-              delay: delay + i * 0.08,
+              duration: 1.55,
+              delay: delay + i * 0.12,
               ease: [0.16, 1, 0.3, 1],
             }}
           >
@@ -58,7 +58,7 @@ export function SplitHeading({
 /** Counts up to a value when it scrolls into view. */
 export function CountUp({
   to,
-  duration = 1.6,
+  duration = 2.2,
   suffix = "",
   className,
 }: {
@@ -104,8 +104,8 @@ export function Magnetic({
   const ref = useRef<HTMLSpanElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 200, damping: 18, mass: 0.5 });
-  const sy = useSpring(y, { stiffness: 200, damping: 18, mass: 0.5 });
+  const sx = useSpring(x, { stiffness: 120, damping: 22, mass: 0.8 });
+  const sy = useSpring(y, { stiffness: 120, damping: 22, mass: 0.8 });
   return (
     <motion.span
       ref={ref}

@@ -7,7 +7,6 @@ import { ArchedFrame, JaliStrip, Mandala } from "@/components/santosh/ornaments"
 import { Reveal } from "@/components/santosh/Reveal";
 import {
   CountUp,
-  DrawnDivider,
   Magnetic,
   Marquee,
   Parallax,
@@ -136,24 +135,23 @@ function Nav() {
     return () => io.disconnect();
   }, []);
   return (
-    <motion.nav
-      initial={false}
-      animate={{
-        paddingTop: scrolled ? 12 : 22,
-        paddingBottom: scrolled ? 12 : 22,
-        backgroundColor: scrolled ? "rgba(245,237,225,0.85)" : "rgba(245,237,225,0.4)",
-      }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-0 inset-x-0 z-50 px-6 md:px-10 flex justify-between items-center backdrop-blur-md border-b border-henna/5"
+    <nav
+      className={
+        "fixed top-0 inset-x-0 z-50 px-6 md:px-10 flex justify-between items-center backdrop-blur-md border-b border-henna/5 opacity-0 animate-header-fade transition-[padding,background-color] duration-700 ease-out " +
+        (scrolled
+          ? "py-3 bg-sand/85"
+          : "py-[22px] bg-sand/40")
+      }
     >
       <a href="#top" className="font-display font-semibold tracking-tight">
-        <motion.span
-          animate={{ fontSize: scrolled ? "1.125rem" : "1.5rem" }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-block"
+        <span
+          className={
+            "inline-block transition-[font-size] duration-700 ease-out " +
+            (scrolled ? "text-lg" : "text-2xl")
+          }
         >
-        SANTOSH
-        </motion.span>
+          SANTOSH
+        </span>
       </a>
       <div className="hidden md:flex gap-10 text-[10px] uppercase tracking-[0.22em] font-medium">
         {NAV.map((n) => (
@@ -189,7 +187,7 @@ function Nav() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             className="absolute top-full left-0 right-0 bg-sand border-b border-henna/10 flex flex-col md:hidden"
           >
             {NAV.map((n, i) => (
@@ -199,7 +197,7 @@ function Nav() {
                 onClick={() => setOpen(false)}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.05 * i, duration: 0.4 }}
+                transition={{ delay: 0.08 * i, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                 className="px-6 py-4 text-xs uppercase tracking-[0.2em] border-t border-henna/5"
               >
                 {n.label}
@@ -208,7 +206,7 @@ function Nav() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }
 
@@ -221,7 +219,7 @@ function Hero() {
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
 
   return (
-    <section id="top" className="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-20 overflow-hidden grain-overlay">
+    <section id="top" className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-14 overflow-visible grain-overlay">
       <motion.div
         style={{ y: mandalaY, rotate: mandalaRot }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(140vw,1100px)] aspect-square text-clay/25 pointer-events-none"
@@ -235,16 +233,19 @@ function Hero() {
         <Mandala className="w-full h-full animate-counter-rotate" />
       </motion.div>
 
-      <motion.div style={{ y: contentY, opacity: heroOpacity }} className="relative z-10 text-center max-w-5xl px-6">
+      <motion.div
+        style={{ y: contentY, opacity: heroOpacity }}
+        className="relative z-10 text-center max-w-5xl px-6 flex flex-col items-center gap-7 md:gap-8"
+      >
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[10px] uppercase tracking-[0.3em] text-clay mb-6"
+          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[10px] uppercase tracking-[0.3em] text-clay"
         >
           Hatha Yoga · Aldridge, UK
         </motion.p>
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl italic leading-[0.95] text-balance">
+        <h1 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-[5.6rem] italic leading-[1.02] text-balance">
           <SplitHeading text="Breath is the bridge between" delay={0.1} />
           <br className="hidden md:block" />
           <span className="text-clay">
@@ -256,11 +257,11 @@ function Hero() {
           style={{ y: portraitY }}
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 flex justify-center"
+          transition={{ duration: 2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="flex justify-center"
         >
           <div className="animate-breathe will-change-transform">
-            <ArchedFrame className="w-full max-w-[360px]">
+            <ArchedFrame className="w-full max-w-[min(320px,56vh)]">
               <img
                 src={heroPortrait}
                 alt="Santosh, founder of Santosh Yoga, in meditation"
@@ -272,20 +273,11 @@ function Hero() {
           </div>
         </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="mt-10 text-xs tracking-[0.3em] uppercase text-sage font-medium"
-        >
-          we need a tagline here
-        </motion.p>
-
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center"
+          transition={{ duration: 1.4, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col sm:flex-row gap-4 items-center justify-center"
         >
           <Magnetic strength={0.3}>
             <a
@@ -302,19 +294,6 @@ function Hero() {
             Learn about Hatha
           </a>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
-          className="mt-20 flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-henna/40"
-        >
-          <span>Scroll</span>
-          <motion.span
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="block h-6 w-px bg-henna/30"
-          />
-        </motion.div>
       </motion.div>
     </section>
   );
@@ -328,22 +307,10 @@ function DisciplineMarquee() {
   );
 }
 
-function SectionDivider() {
-  return (
-    <div className="px-6">
-      <div className="max-w-6xl mx-auto text-henna/40">
-        <JaliStrip className="h-6 w-full" />
-      </div>
-    </div>
-  );
-}
-
 function IntroHatha() {
   return (
     <section id="practice" className="py-28 md:py-40 px-6">
-      <div className="max-w-6xl mx-auto mb-16 md:mb-24 text-clay/40">
-        <DrawnDivider className="h-6 w-full" />
-      </div>
+      <div className="max-w-6xl mx-auto mb-16 md:mb-24 h-6" />
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-center">
         <Reveal className="space-y-6">
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay">The Practice</p>
@@ -382,7 +349,7 @@ function IntroHatha() {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.8, delay: 0.1 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 1.2, delay: 0.15 + i * 0.18, ease: [0.16, 1, 0.3, 1] }}
                   className="flex gap-4 items-baseline"
                 >
                   <span className="text-[10px] tracking-[0.2em] font-sans not-italic text-clay">{n}</span>
@@ -517,9 +484,6 @@ function Schedule() {
   return (
     <section id="schedule" className="py-28 md:py-36 px-6 bg-sand-deep/40 border-y border-henna/10">
       <div className="max-w-4xl mx-auto">
-        <div className="text-clay/40 mb-12">
-          <DrawnDivider className="h-6 w-full" />
-        </div>
         <Reveal className="text-center mb-14">
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Schedule</p>
           <h3 className="font-display text-4xl md:text-5xl italic">Weekly Practice</h3>
@@ -565,8 +529,8 @@ function Visit() {
           <h3 className="font-display text-4xl md:text-5xl italic mb-10">The Aldridge Studio</h3>
           <div className="aspect-[4/3] bg-sand-deep grid place-items-center mb-6 ring-1 ring-henna/10 relative overflow-hidden">
             <div className="absolute inset-0 jali-dots opacity-20" />
-            <span className="relative text-[10px] uppercase tracking-[0.28em] text-henna/50">
-              Map · Aldridge, UK
+            <span className="relative font-display text-5xl italic text-henna/70">
+              Aldridge
             </span>
           </div>
           <dl className="space-y-4 text-sm">
@@ -712,9 +676,6 @@ function Footer() {
   return (
     <footer className="bg-henna text-sand/80 pt-20 pb-10 px-6 grain-overlay">
       <div className="max-w-6xl mx-auto">
-        <div className="text-clay/40 mb-16">
-          <JaliStrip className="h-6 w-full" />
-        </div>
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           <div>
             <p className="font-display text-3xl italic text-sand">Santosh Yoga</p>
