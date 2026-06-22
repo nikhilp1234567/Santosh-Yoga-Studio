@@ -254,7 +254,7 @@ function Hero() {
           <SplitHeading text="Breath is the bridge between" delay={0.1} />
           <br className="hidden md:block" />
           <span className="text-clay">
-            <SplitHeading text="body and soul." delay={0.55} />
+            <SplitHeading text=" body and soul." delay={0.55} />
           </span>
         </h1>
 
