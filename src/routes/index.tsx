@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import heroPortrait from "@/assets/hero-portrait.png";
+import heroPortrait from "@/assets/hero-portrait-640.jpg";
 import teacherPortrait from "@/assets/teacher-portrait.png";
 import lotusLogo from "@/assets/lotus.png";
 import { ArchedFrame, JaliStrip, Mandala } from "@/components/santosh/ornaments";
@@ -23,18 +23,19 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    links: [{ rel: "preload", as: "image", href: heroPortrait, fetchPriority: "high" }],
     meta: [
       { title: "Santosh Yoga — Hatha yoga studio in Aldridge" },
       {
         name: "description",
         content:
-          "A boutique Hatha yoga sanctuary in Aldridge, UK. Drawing on a decade of practice across Ashtanga, Rocket, Yin, Iyengar and Kundalini.",
+          "A boutique Hatha yoga sanctuary in Aldridge, UK, offering beginner and mixed ability Hatha classes.",
       },
       { property: "og:title", content: "Santosh Yoga — Hatha yoga studio in Aldridge" },
       {
         property: "og:description",
         content:
-          "Breath, stillness, Santosh. Traditional Hatha yoga and conscious movement in Aldridge, West Midlands.",
+          "Breath, stillness, Santosh. Beginner and mixed ability Hatha yoga in Aldridge, West Midlands.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -271,8 +272,11 @@ function Hero() {
               <img
                 src={heroPortrait}
                 alt="Santosh, founder of Santosh Yoga, in meditation"
-                width={1088}
-                height={1344}
+                width={640}
+                height={800}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 className="w-full h-auto block"
               />
             </ArchedFrame>
@@ -318,8 +322,8 @@ function IntroHatha() {
             breath and quiet, deliberate attention.
           </p>
           <p className="text-pretty leading-relaxed text-henna/60">
-            Classes are warm, unhurried and welcoming to every body — from the first time on a mat
-            to a long-standing daily practice.
+            Classes focus on Hatha yoga for beginners and mixed ability students — warm,
+            unhurried and welcoming to every body.
           </p>
           <div className="h-px w-24 bg-clay" />
           <p className="text-[10px] uppercase tracking-[0.25em] text-henna/40">
@@ -438,7 +442,7 @@ function Teacher() {
           </h2>
           <div className="grid grid-cols-3 gap-6 py-4">
             <Stat value={10} suffix="" label="Years practising" />
-            <Stat value={6} label="Styles taught" />
+            <Stat value={2} label="Class levels" />
             <Stat value={1} label="Sanctuary in Aldridge" />
           </div>
           <p className="font-display text-2xl italic leading-relaxed text-henna/80">
@@ -446,8 +450,8 @@ function Teacher() {
           </p>
           <p className="text-base leading-relaxed text-henna/75">
             With a decade of dedicated practice across Ashtanga, Rocket, Yin, Hatha, Iyengar and
-            Kundalini, Santosh brings depth, anatomical care and quiet spirit to every class here in
-            Aldridge.
+            Kundalini, Santosh now teaches Hatha yoga for beginners and mixed ability students,
+            bringing depth, anatomical care and quiet spirit to every class here in Aldridge.
           </p>
           <div className="grid grid-cols-1 gap-8 pt-4 border-t border-henna/10">
             <div>
@@ -478,10 +482,10 @@ function Stat({ value, suffix = "", label }: { value: number; suffix?: string; l
 
 function Schedule() {
   const rows = [
-    { day: "Monday", time: "07:30", name: "Rise & Hatha", price: "£12" },
-    { day: "Wednesday", time: "18:30", name: "Rocket Flow", price: "£15" },
-    { day: "Friday", time: "10:00", name: "Slow Hatha", price: "£12" },
-    { day: "Sunday", time: "17:00", name: "Yin & Stillness", price: "£14" },
+    { day: "Monday", time: "07:30", name: "Beginner Hatha", price: "£12" },
+    { day: "Wednesday", time: "18:30", name: "Mixed Ability Hatha", price: "£12" },
+    { day: "Friday", time: "10:00", name: "Beginner Hatha", price: "£12" },
+    { day: "Sunday", time: "17:00", name: "Mixed Ability Hatha", price: "£12" },
   ];
   return (
     <section
@@ -619,7 +623,7 @@ function CommonQueries() {
               },
               {
                 q: "Are beginners welcome?",
-                a: "Always. Hatha is taught with multi-level options and Santosh will gently guide you through each posture.",
+                a: "Always. Santosh teaches beginner and mixed ability Hatha classes, with gentle guidance through each posture.",
               },
               {
                 q: "Can I practise during pregnancy?",
