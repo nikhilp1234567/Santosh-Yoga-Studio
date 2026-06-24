@@ -83,10 +83,10 @@ const STYLES = [
 ];
 
 const NAV = [
-  { label: "Practice", href: "#practice" },
-  { label: "The Teacher", href: "#teacher" },
-  { label: "Schedule", href: "#schedule" },
-  { label: "Aldridge Studio", href: "#visit" },
+  { label: "practice", href: "#practice" },
+  { label: "teacher", href: "#teacher" },
+  { label: "schedule", href: "#schedule" },
+  { label: "contact", href: "#visit" },
 ];
 
 function Index() {
@@ -555,7 +555,7 @@ function Visit() {
 
 function ContactDetails() {
   const details = [
-    { label: "Email", value: "hello@santoshyoga.com" },
+    { label: "Email", value: "hello@santoshyoga.co.uk" },
     { label: "Phone", value: "+44 7807 339051" },
     { label: "Location", value: "Aldridge, West Midlands, UK" },
   ];
@@ -594,11 +594,11 @@ function Voices() {
         <Reveal className="text-center">
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-6">Voices</p>
           <p className="font-display text-2xl md:text-3xl italic leading-relaxed text-henna/85">
-            “we need testimonials here — a quiet, generous space. Santosh teaches with real depth
-            and warmth. I leave every class feeling lighter.”
+            “Santosh is an amazing yogi with a rare depth of practice, presence and care. Her
+            teaching carries both discipline and genuine warmth.”
           </p>
           <p className="text-[10px] uppercase tracking-[0.28em] mt-8 text-henna/40">
-            — placeholder · we need real testimonials here
+            — David, Santosh’s former yoga teacher
           </p>
         </Reveal>
       </div>
@@ -667,16 +667,12 @@ function Footer() {
           </div>
           <div>
             <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Visit</p>
-            <p className="text-sm">we need address here</p>
             <p className="text-sm">Aldridge, UK</p>
           </div>
           <div>
             <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Connect</p>
-            <p className="text-sm">we need email here</p>
-            <p className="text-sm">we need phone here</p>
-            <p className="text-sm">
-              Instagram — <span className="text-sand/50">we need Instagram handle here</span>
-            </p>
+            <p className="text-sm">hello@santoshyoga.co.uk</p>
+            <p className="text-sm">+44 7807 339051</p>
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-between gap-4 pt-8 border-t border-sand/10 text-[10px] uppercase tracking-[0.28em] text-sand/40">
