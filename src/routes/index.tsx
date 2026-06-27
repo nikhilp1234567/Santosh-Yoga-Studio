@@ -529,12 +529,12 @@ function Schedule() {
 function Visit() {
   const isMobile = useIsMobile();
   return (
-    <section id="visit" className="py-28 md:py-36 px-6 md:px-10">
+    <section id="visit" className="py-28 md:py-36 px-6 md:px-10 overflow-hidden">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24">
         <Reveal>
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Find us</p>
           <h3 className="font-display text-4xl md:text-5xl italic mb-10">The Aldridge Studio</h3>
-          <div className="aspect-[4/3] bg-sand-deep mb-6 ring-1 ring-henna/10 relative overflow-hidden">
+          <div className="aspect-[4/3] bg-sand-deep mb-6 ring-1 ring-henna/10 relative overflow-hidden max-w-full">
             <iframe
               title="Map of Aldridge"
               src="https://www.google.com/maps?q=Aldridge%2C%20Walsall%2C%20UK&output=embed"
@@ -576,9 +576,9 @@ function ContactDetails() {
         </p>
         <div className="divide-y divide-sand/10 border-y border-sand/10">
           {details.map((item) => (
-            <div key={item.label} className="grid grid-cols-[7rem_1fr] gap-5 py-6 items-baseline">
+            <div key={item.label} className="flex flex-col sm:grid sm:grid-cols-[7rem_1fr] gap-1 sm:gap-5 py-6 items-baseline">
               <p className="text-[10px] uppercase tracking-[0.22em] text-clay">{item.label}</p>
-              <p className="font-display text-2xl italic text-sand">{item.value}</p>
+              <p className="font-display text-2xl italic text-sand break-words">{item.value}</p>
             </div>
           ))}
         </div>
