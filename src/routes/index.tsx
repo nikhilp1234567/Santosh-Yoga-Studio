@@ -1,9 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import heroPortrait from "@/assets/hero-portrait-640.jpg";
 import teacherPortrait from "@/assets/teacher-portrait.png";
-import lotusLogo from "@/assets/lotus.png";
 import { ArchedFrame, JaliStrip, Mandala } from "@/components/santosh/ornaments";
 import { Reveal } from "@/components/santosh/Reveal";
 import {
@@ -20,6 +19,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { YOGA_STYLES } from "@/lib/yoga-styles";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,45 +42,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
-
-const STYLES = [
-  {
-    num: "01",
-    name: "Ashtanga",
-    blurb: "A structured, dynamic series that builds internal heat through breath-linked movement.",
-    href: "https://www.ekhartyoga.com/resources/styles/ashtanga-yoga",
-  },
-  {
-    num: "02",
-    name: "Rocket",
-    blurb: "A faster, playful evolution of Ashtanga that opens up arm balances and inversions.",
-    href: "https://theyogaspace.co.uk/what-is-rocket-yoga/",
-  },
-  {
-    num: "03",
-    name: "Yin",
-    blurb: "Long, quiet floor-based holds that work into the connective tissue and stillness.",
-    href: "https://www.ekhartyoga.com/resources/styles/yin-yoga",
-  },
-  {
-    num: "04",
-    name: "Hatha",
-    blurb: "The foundation. Steady postures and conscious breath, aligning sun and moon.",
-    href: "https://www.yogajournal.com/yoga-101/types-of-yoga/hatha/",
-  },
-  {
-    num: "05",
-    name: "Iyengar",
-    blurb: "Meticulous alignment supported by props — precise, patient, deeply therapeutic.",
-    href: "https://www.ekhartyoga.com/articles/practice/what-is-iyengar-yoga",
-  },
-  {
-    num: "06",
-    name: "Kundalini",
-    blurb: "Kriya, mantra and breathwork to awaken energy and quiet the inner noise.",
-    href: "https://www.mindbodygreen.com/articles/kundalini-yoga-101-everything-you-wanted-to-know",
-  },
-];
 
 const NAV = [
   { label: "practice", href: "#practice" },
@@ -322,8 +283,8 @@ function IntroHatha() {
             breath and quiet, deliberate attention.
           </p>
           <p className="text-pretty leading-relaxed text-henna/60">
-            Classes focus on Hatha yoga for beginners and mixed ability students — warm,
-            unhurried and welcoming to every body.
+            Classes focus on Hatha yoga for beginners and mixed ability students — warm, unhurried
+            and welcoming to every body.
           </p>
           <div className="h-px w-24 bg-clay" />
           <p className="text-[10px] uppercase tracking-[0.25em] text-henna/40">
@@ -382,12 +343,11 @@ function Disciplines() {
       </div>
 
       <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-sand/10 border-y border-sand/10">
-        {STYLES.map((s, i) => (
+        {YOGA_STYLES.map((s, i) => (
           <Reveal key={s.name} delay={i * 0.05}>
-            <a
-              href={s.href}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to="/yoga/$style"
+              params={{ style: s.slug }}
               className="group relative block p-10 lg:p-12 h-full bg-henna hover:bg-henna/70 transition-colors overflow-hidden"
             >
               <div className="pointer-events-none absolute -right-10 -bottom-10 w-56 h-56 text-clay/0 group-hover:text-clay/40 transition-colors duration-700">
@@ -409,7 +369,7 @@ function Disciplines() {
                   →
                 </span>
               </span>
-            </a>
+            </Link>
           </Reveal>
         ))}
       </div>
@@ -460,7 +420,10 @@ function Teacher() {
             </div>
             <div>
               <p className="text-[10px] uppercase tracking-[0.22em] text-clay mb-2">Story</p>
-              <p className="text-sm text-henna/60">I began practicing yoga 10 years ago as an escape from the stress of daily life. I quickly fell in love with not only the moves, but the mindset behind them. </p>
+              <p className="text-sm text-henna/60">
+                I began practicing yoga 10 years ago as an escape from the stress of daily life. I
+                quickly fell in love with not only the moves, but the mindset behind them.{" "}
+              </p>
             </div>
           </div>
         </Reveal>
@@ -572,11 +535,15 @@ function ContactDetails() {
         <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Contact</p>
         <h3 className="font-display text-3xl md:text-4xl italic mb-5">Speak with the studio</h3>
         <p className="text-sand/65 leading-relaxed mb-10 max-w-md">
-          For class questions, private sessions or first-visit guidance, use the direct details below.
+          For class questions, private sessions or first-visit guidance, use the direct details
+          below.
         </p>
         <div className="divide-y divide-sand/10 border-y border-sand/10">
           {details.map((item) => (
-            <div key={item.label} className="flex flex-col sm:grid sm:grid-cols-[7rem_1fr] gap-1 sm:gap-5 py-6 items-baseline">
+            <div
+              key={item.label}
+              className="flex flex-col sm:grid sm:grid-cols-[7rem_1fr] gap-1 sm:gap-5 py-6 items-baseline"
+            >
               <p className="text-[10px] uppercase tracking-[0.22em] text-clay">{item.label}</p>
               <p className="font-display text-2xl italic text-sand break-words">{item.value}</p>
             </div>
@@ -678,14 +645,22 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between gap-4 pt-8 border-t border-sand/10 text-[10px] uppercase tracking-[0.28em] text-sand/40">
           <span>© {new Date().getFullYear()} Santosh Yoga</span>
           <span className="normal-case tracking-[0.15em]">
-            Built with <img src={lotusLogo} alt="" className="h-8 w-auto inline-block align-middle" /> by{" "}
+            Built with
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className="mx-1 inline-block h-2.5 w-2.5 align-middle"
+            >
+              <circle cx="12" cy="12" r="10" fill="#01796f" />
+            </svg>
+            by{" "}
             <a
-              href="https://littlelotus.co"
+              href="https://parmarworks.com"
               target="_blank"
               rel="noreferrer"
-              className="underline underline-offset-2 hover:text-sand/60 transition-colors"
+              className="text-sand/60 hover:text-white hover:underline transition-colors"
             >
-              Little Lotus
+              Parmarworks
             </a>
           </span>
         </div>
