@@ -45,7 +45,7 @@ export const Route = createFileRoute("/")({
 
 const NAV = [
   { label: "practice", href: "#practice" },
-  { label: "teacher", href: "#teacher" },
+  { label: "about", href: "#about" },
   { label: "schedule", href: "#schedule" },
   { label: "contact", href: "#visit" },
 ];
@@ -56,10 +56,10 @@ function Index() {
       <ScrollProgress />
       <Nav />
       <Hero />
-      <IntroHatha />
+      <WhatIsYoga />
+      <AboutSantosh />
       {/* <DisciplineMarquee /> */}
       <Disciplines />
-      <Teacher />
       <Schedule />
       <Visit />
       <Voices />
@@ -166,7 +166,7 @@ function Nav() {
               transition={{ delay: 0.08 * NAV.length, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
               className="mx-6 my-5 inline-flex justify-center border border-henna/25 px-4 py-3 text-[10px] uppercase tracking-[0.22em]"
             >
-              Join WhatsApp Group
+              Contact the studio
             </motion.a>
           </motion.div>
         )}
@@ -264,7 +264,7 @@ function Hero() {
   );
 }
 
-function IntroHatha() {
+function WhatIsYoga() {
   const { scrollY } = useScroll();
   const hathaMandalaRot = useTransform(scrollY, [0, 2000], [0, -40]);
   return (
@@ -272,24 +272,21 @@ function IntroHatha() {
       <div className="max-w-6xl mx-auto mb-16 md:mb-24 h-6" />
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         <Reveal className="space-y-6">
-          <p className="text-[10px] uppercase tracking-[0.28em] text-clay">The Practice</p>
+          <p className="text-[10px] uppercase tracking-[0.28em] text-clay">Yoga</p>
           <h2 className="font-display text-4xl md:text-5xl italic leading-tight">
-            The Spirit of Hatha
+            What is Yoga?
           </h2>
           <p className="text-pretty leading-relaxed text-henna/80 text-lg">
-            Hatha is the foundation of balance — uniting the sun{" "}
-            <span className="italic">(Ha)</span> and the moon <span className="italic">(Tha)</span>.
-            Our practice in Aldridge honours this ancient lineage through steady posture, conscious
-            breath and quiet, deliberate attention.
+            Yoga is a practice that brings the body, breath and mind together through movement,
+            breathing and quiet attention. It can build strength and flexibility while cultivating
+            steadiness, self-awareness and a deeper connection with ourselves.
           </p>
           <p className="text-pretty leading-relaxed text-henna/60">
-            Classes focus on Hatha yoga for beginners and mixed ability students — warm, unhurried
-            and welcoming to every body.
+            At Santosh Yoga, this is explored through Hatha: steady postures, conscious breath and
+            deliberate attention. Classes in Aldridge are warm, unhurried and welcoming to
+            beginners, mixed ability students and every body.
           </p>
           <div className="h-px w-24 bg-clay" />
-          <p className="text-[10px] uppercase tracking-[0.25em] text-henna/40">
-            draft copy — we need your wording here
-          </p>
         </Reveal>
         <Reveal delay={0.1}>
           <div className="relative aspect-[4/5] bg-sand-deep overflow-hidden">
@@ -329,7 +326,7 @@ function IntroHatha() {
 
 function Disciplines() {
   return (
-    <section className="py-28 md:py-36 px-6 md:px-10 bg-henna text-sand grain-overlay">
+    <section className="py-28 md:py-36 px-6 md:px-10 bg-sand text-henna grain-overlay">
       <div className="mb-16 max-w-6xl mx-auto">
         <Reveal>
           <p className="text-[10px] uppercase tracking-[0.28em] text-clay mb-4">Disciplines</p>
@@ -342,15 +339,15 @@ function Disciplines() {
         </Reveal>
       </div>
 
-      <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-sand/10 border-y border-sand/10">
+      <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-henna/10 border-y border-henna/10">
         {YOGA_STYLES.map((s, i) => (
           <Reveal key={s.name} delay={i * 0.05}>
             <Link
               to="/yoga/$style"
               params={{ style: s.slug }}
-              className="group relative block p-10 lg:p-12 h-full bg-henna hover:bg-henna/70 transition-colors overflow-hidden"
+              className="group relative block p-10 lg:p-12 h-full bg-sand hover:bg-sand-deep/60 transition-colors overflow-hidden"
             >
-              <div className="pointer-events-none absolute -right-10 -bottom-10 w-56 h-56 text-clay/0 group-hover:text-clay/40 transition-colors duration-700">
+              <div className="pointer-events-none absolute -right-10 -bottom-10 w-56 h-56 text-clay/0 group-hover:text-clay/25 transition-colors duration-700">
                 <Mandala className="w-full h-full animate-slow-rotate" />
               </div>
               <span className="relative text-[10px] text-clay font-medium tracking-[0.22em]">
@@ -377,9 +374,12 @@ function Disciplines() {
   );
 }
 
-function Teacher() {
+function AboutSantosh() {
   return (
-    <section id="teacher" className="py-28 md:py-40 px-6 md:px-10">
+    <section
+      id="about"
+      className="py-28 md:py-40 px-6 md:px-10 bg-henna text-sand grain-overlay"
+    >
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
         <Reveal className="w-full lg:w-1/2">
           <Parallax distance={30}>
@@ -396,34 +396,30 @@ function Teacher() {
           </Parallax>
         </Reveal>
         <Reveal delay={0.1} className="w-full lg:w-1/2 space-y-8">
-          <p className="text-[10px] uppercase tracking-[0.28em] text-clay">The Teacher</p>
+          <p className="text-[10px] uppercase tracking-[0.28em] text-clay">About Santosh</p>
           <h2 className="font-display text-4xl md:text-5xl italic leading-tight">
-            Guided by Santosh.
+            A practice shaped by steadiness.
           </h2>
           <div className="grid grid-cols-3 gap-6 py-4">
-            <Stat value={10} suffix="" label="Years practising" />
-            <Stat value={2} label="Class levels" />
-            <Stat value={1} label="Sanctuary in Aldridge" />
+            <Stat value={10} suffix="" label="Years practising" inverse />
+            <Stat value={2} label="Class levels" inverse />
+            <Stat value={1} label="Sanctuary in Aldridge" inverse />
           </div>
-          <p className="font-display text-2xl italic leading-relaxed text-henna/80">
-            “Yoga is not about touching your toes — it’s about what you learn on the way down.”
+          <p className="font-display text-2xl italic leading-relaxed text-sand/85">
+            What began as a way to step away from everyday stress became a lasting source of
+            steadiness, self-awareness and connection.
           </p>
-          <p className="text-base leading-relaxed text-henna/75">
-            With a decade of dedicated practice across Ashtanga, Rocket, Yin, Hatha, Iyengar and
-            Kundalini, Santosh now teaches Hatha yoga for beginners and mixed ability students,
-            bringing depth, anatomical care and quiet spirit to every class here in Aldridge.
+          <p className="text-base leading-relaxed text-sand/70">
+            Santosh began practising yoga ten years ago and soon became drawn as much to its mindset
+            as to its movement. Her practice has taken her through Ashtanga, Rocket, Yin, Hatha,
+            Iyengar and Kundalini. Today, she teaches warm, unhurried Hatha classes for beginners
+            and mixed ability students in Aldridge, creating space for each person to practise with
+            care and attention.
           </p>
-          <div className="grid grid-cols-1 gap-8 pt-4 border-t border-henna/10">
+          <div className="grid grid-cols-1 gap-8 pt-4 border-t border-sand/15">
             <div>
               <p className="text-[10px] uppercase tracking-[0.22em] text-clay mb-2">Training</p>
-              <p className="text-sm text-henna/60">Level 3 Diploma in Teaching Yoga - HFE</p>
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.22em] text-clay mb-2">Story</p>
-              <p className="text-sm text-henna/60">
-                I began practicing yoga 10 years ago as an escape from the stress of daily life. I
-                quickly fell in love with not only the moves, but the mindset behind them.{" "}
-              </p>
+              <p className="text-sm text-sand/60">Level 3 Diploma in Teaching Yoga - HFE</p>
             </div>
           </div>
         </Reveal>
@@ -432,13 +428,30 @@ function Teacher() {
   );
 }
 
-function Stat({ value, suffix = "", label }: { value: number; suffix?: string; label: string }) {
+function Stat({
+  value,
+  suffix = "",
+  label,
+  inverse = false,
+}: {
+  value: number;
+  suffix?: string;
+  label: string;
+  inverse?: boolean;
+}) {
   return (
     <div>
       <p className="font-display text-4xl md:text-5xl italic text-clay leading-none">
         <CountUp to={value} suffix={suffix} />
       </p>
-      <p className="text-[10px] uppercase tracking-[0.22em] text-henna/60 mt-2">{label}</p>
+      <p
+        className={
+          "text-[10px] uppercase tracking-[0.22em] mt-2 " +
+          (inverse ? "text-sand/55" : "text-henna/60")
+        }
+      >
+        {label}
+      </p>
     </div>
   );
 }
@@ -586,7 +599,7 @@ function CommonQueries() {
             {[
               {
                 q: "What should I bring?",
-                a: "Just yourself, comfortable clothes you can move in, and a water bottle. We have mats, blocks, bolsters and blankets available — please confirm with the studio.",
+                a: "Wear comfortable clothes, bring some water and bring a mat if you have one. Contact Santosh before class if you need to borrow equipment.",
               },
               {
                 q: "Are beginners welcome?",
@@ -594,15 +607,15 @@ function CommonQueries() {
               },
               {
                 q: "Can I practise during pregnancy?",
-                a: "Please get in touch before booking so Santosh can recommend the right class and modifications. we need confirmed guidance here.",
+                a: "Please contact Santosh before booking. She can explain what the class involves so you can decide whether it is suitable for you.",
               },
               {
                 q: "How do I book?",
-                a: "Use the contact details below or message us directly. we need booking link / system here.",
+                a: "Use the email address or phone number in the Contact section above to book or ask about current availability.",
               },
               {
                 q: "Do you offer private sessions?",
-                a: "Yes — 1-to-1 and small group privates are available on request. we need pricing here.",
+                a: "Yes — 1-to-1 and small-group private sessions are available on request. Contact Santosh for current availability and pricing.",
               },
             ].map((item) => (
               <AccordionItem key={item.q} value={item.q} className="border-b border-henna/10">
